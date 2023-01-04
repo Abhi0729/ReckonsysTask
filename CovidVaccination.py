@@ -89,7 +89,7 @@ def main(conn, args):
   elif args['action'] == 'add':
     # if role is User we are not adding Vaccination centre it is only for admin role    
     if args['role']=='user':
-      print('We cannot add center')
+      print('Only admin can add vaccination center')
     else:
       add_center(conn, args['name'], args['location'], args['capacity'])
       print('Vaccination center added successfully')

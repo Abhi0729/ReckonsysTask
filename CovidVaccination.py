@@ -1,13 +1,6 @@
 import argparse
 import mysql.connector
 
-def parse_args():
-  parser = argparse.ArgumentParser()
-  parser.add_argument('--username', required=True)
-  parser.add_argument('--password', required=True)
-  parser.add_argument('--action', required=True, choices=['login', 'signup', 'search', 'apply', 'add', 'get'])
-  parser.add
-
 
 
 def parse_args():
@@ -92,9 +85,15 @@ def main(conn, args):
       print('Vaccination applied successfully')
     else:
       print('All slots are full')
+ # Checking for Addition of new Vaccination centre
   elif args['action'] == 'add':
-    add_center(conn, args['name'], args['location'], args['capacity'])
-    print('Vaccination center added successfully')
+    # if role is User we are not adding Vaccination centre it is only for admin role    
+    if args['role']=='user':
+      print('We cannot add center')
+    else:
+      add_center(conn, args['name'], args['location'], args['capacity'])
+      print('Vaccination center added successfully')
+  # Dosage Details
   elif args['action'] == 'get':
     dosages = get_dosage(conn, args['center_id'])
     print(f"Dosage details for center {args['center_id']}:")
@@ -106,7 +105,8 @@ if __name__ == '__main__':
   args = parse_args()
   conn = mysql.connector.connect(
     host='localhost',
-    user='user',
+    port=3307,
+    user='root',
     password='',
     database='covid_vaccination'
   )

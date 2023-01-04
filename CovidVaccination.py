@@ -83,7 +83,7 @@ def main(conn, args):
     print('User created successfully')
   elif args['action'] == 'search':
     centers = search_centers(conn, args['location'])
-    print(f'Centers in {args['location']}:')
+    print(f"Centers in {args['location']}:")
     for center in centers:
       print(center)
   elif args['action'] == 'apply':
@@ -97,7 +97,7 @@ def main(conn, args):
     print('Vaccination center added successfully')
   elif args['action'] == 'get':
     dosages = get_dosage(conn, args['center_id'])
-    print(f'Dosage details for center {args['center_id']}:')
+    print(f"Dosage details for center {args['center_id']}:")
     for date, dosage in dosages:
       print(f'{date}: {dosage}')
 
